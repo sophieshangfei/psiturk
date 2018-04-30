@@ -140,12 +140,12 @@ async function initializeExperiment() {
 // 		timeline.push(instruction, introduction, bonus_instruction, test, question_boxby, question_daxby, questions, goodbye);
 // 	}
 	timeline = [
-		// instruction,
-		// introduction,
-		// secondary_task,
-		// bonus_instruction,
-		// test,
-		// recall,
+		instruction,
+		introduction,
+		secondary_task,
+		bonus_instruction,
+		test,
+		recall,
 		question_boxby,
 		question_daxby,
 		questions,
