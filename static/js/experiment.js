@@ -66,17 +66,17 @@ async function initializeExperiment() {
 // 		show_clickable_nav: true
 // 	}
 //
-	var test = {
-		type: "robot",
-		timeline: stimuli,
-		prompt: `<p class="center-content">
-			Where is this robot from?<br>
-			Press <b>D</b> for Daxby Land or <b>B</b> for Boxby Land.
-			</p>`,
-		choices: ['b', 'd'],
-		randomize_order: true
-	};
-//
+// 	var test = {
+// 		type: "robot",
+// 		timeline: stimuli,
+// 		prompt: `<p class="center-content">
+// 			Where is this robot from?<br>
+// 			Press <b>D</b> for Daxby Land or <b>B</b> for Boxby Land.
+// 			</p>`,
+// 		choices: ['b', 'd'],
+// 		randomize_order: true
+// 	};
+// //
 // 	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."]
 //
 // 	var recall = {
@@ -124,11 +124,11 @@ async function initializeExperiment() {
 	var timeline = []
 
 	// if (condition == 1){
-	// 	timeline.push(instruction, animation_trial, secondary_task, bonus_instruction, test, recall, question_boxby, question_daxby, questions, goodbye);
+		// 	timeline.push(instruction, animation_trial, secondary_task, bonus_instruction, test, recall, question_boxby, question_daxby, questions, goodbye);
 	// } else {
 	// 	timeline.push(instruction, animation_trial, bonus_instruction, test, question_boxby, question_daxby, questions, goodbye);
 	// }
-	var timeline = [test]
+	var timeline = [secondary_task]
 
   return startExperiment({
     timeline,
