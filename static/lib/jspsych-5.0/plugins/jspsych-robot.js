@@ -20,7 +20,7 @@ jsPsych.plugins["robot"] = (function() {
     //   {'color': 'red', 'group': 'boxby'},
 
     console.log('ROBOT TRIAL')
-    html = `<img class='display robot' src='robot_land/${trial.color}.png'>`;
+    html = `<img class='display robot' src='static/images/${trial.color}.png'>`;
     console.log(html)
     $('<div>', {id: 'stage'}).html(html).appendTo(display_element);
     var $feedback = $('<div>', {id: 'feedback'}).appendTo(display_element);
@@ -39,7 +39,7 @@ jsPsych.plugins["robot"] = (function() {
       if (correct) {
         BONUS += BONUS_RATE
       }
-	  
+    
 
       var capitalize = function(string) {
         return string.charAt(0).toUpperCase() + string.substring(1).toLowerCase();
@@ -54,8 +54,8 @@ jsPsych.plugins["robot"] = (function() {
 
         This robot is from ${capitalize(trial.group)} Land.
         
-		<br>
-		Your current bonus is $${BONUS.toFixed(2)}
+    <br>
+    Your current bonus is $${BONUS.toFixed(2)}
 
       `)
 

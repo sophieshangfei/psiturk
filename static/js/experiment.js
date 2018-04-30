@@ -7,13 +7,25 @@ async function initializeExperiment() {
 	BONUS = 0
 	BONUS_RATE = 0.01
   
-  jsPsych.pluginAPI.preloadImages(['static/images/robot_land/population.png', 'static/images/robot_land/yellow.png','static/images/robot_land/blue.png']);
+  jsPsych.pluginAPI.preloadImages(['static/images/population.png',
+                                   'static/images/yellow.png',
+                                   'static/images/blue.png']);
 	
 	var instruction = {
 		type: "instructions",
 		pages: [
-			'Welcome to the experiment. Click next to begin.',
-			'You are going to observe two groups of robots. One group comes from Boxby Land. The other group comes from Daxby Land. For this experiment, we try to draw a random sample from the robot population. In the robot world, Boxby Land is less populated, and as such, robots from Boxby Land occur less frequently in the pictures you will see.'
+			// `
+			// 	<h1>Welcome</h1>
+			// 	Welcome to the experiment. Click next to begin.
+			// `,
+			`
+				<h1>Instructions</h1>
+				You are going to observe two groups of robots. One group comes from
+				Boxby Land. The other group comes from Daxby Land. For this
+				experiment, we try to draw a random sample from the robot population.
+				In the robot world, Boxby Land is less populated, and as such, robots
+				from Boxby Land occur less frequently in the pictures you will see.
+			`
 		],
 		show_clickable_nav: true
 	}
@@ -21,7 +33,7 @@ async function initializeExperiment() {
 
 	var introduction = {
 		type: 'single-stim',
-		stimulus: "static/images/robot_land/population.png",
+		stimulus: "static/images/population.png",
 		choices: ["y", "n"],
 		prompt: '<p class="center-content">Press y when you are ready.</p>'
 	};
@@ -66,16 +78,16 @@ async function initializeExperiment() {
 // 		show_clickable_nav: true
 // 	}
 //
-// 	var test = {
-// 		type: "robot",
-// 		timeline: stimuli,
-// 		prompt: `<p class="center-content">
-// 			Where is this robot from?<br>
-// 			Press <b>D</b> for Daxby Land or <b>B</b> for Boxby Land.
-// 			</p>`,
-// 		choices: ['b', 'd'],
-// 		randomize_order: true
-// 	};
+	var test = {
+		type: "robot",
+		timeline: stimuli,
+		prompt: `<p class="center-content">
+			Where is this robot from?<br>
+			Press <b>D</b> for Daxby Land or <b>B</b> for Boxby Land.
+			</p>`,
+		choices: ['b', 'd'],
+		randomize_order: true
+	};
 // //
 // 	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."]
 //
@@ -121,14 +133,16 @@ async function initializeExperiment() {
   /////////////////////////
 
 	var condition = 1
-	var timeline = []
-
 	// if (condition == 1){
 		// 	timeline.push(instruction, animation_trial, secondary_task, bonus_instruction, test, recall, question_boxby, question_daxby, questions, goodbye);
 	// } else {
 	// 	timeline.push(instruction, animation_trial, bonus_instruction, test, question_boxby, question_daxby, questions, goodbye);
 	// }
-	var timeline = [introduction, secondary_task]
+	var timeline = [
+		instruction,
+		introduction,
+		test
+	]
 
   return startExperiment({
     timeline,
