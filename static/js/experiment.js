@@ -128,7 +128,7 @@ async function initializeExperiment() {
 	// } else {
 	// 	timeline.push(instruction, animation_trial, bonus_instruction, test, question_boxby, question_daxby, questions, goodbye);
 	// }
-	var timeline = [secondary_task]
+	var timeline = [test]
 
   return startExperiment({
     timeline,
