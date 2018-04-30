@@ -68,16 +68,16 @@ async function initializeExperiment() {
 		is_html: true,
 		required: [true]
 	};
-//
-// 	var bonus_instruction = {
-// 		type: "instructions",
-// 		pages: [
-// 			`<p>For the following tasks, you will be asked to make some predictions.</p>
-// 			<p>You will receive a bonus of <strong> 1 cent </strong> for each correct prediction`
-// 		],
-// 		show_clickable_nav: true
-// 	}
-//
+
+	var bonus_instruction = {
+		type: "instructions",
+		pages: [
+			`<p>For the following tasks, you will be asked to make some predictions.</p>
+			<p>You will receive a bonus of <strong> 1 cent </strong> for each correct prediction`
+		],
+		show_clickable_nav: true
+	}
+
 	var test = {
 		type: "robot",
 		timeline: stimuli,
@@ -89,44 +89,44 @@ async function initializeExperiment() {
 		randomize_order: true
 	};
 	console.log("test")
-// //
-// 	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."]
 //
-// 	var recall = {
-// 		type: 'survey-text',
-// 		questions: recall_q
-// 	}
-//
-//
-// 	var questions_boxby = ["<p>How many times has a robot with a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body appeared?</p> ", "<p>How many times has a robot with a  <strong style = 'color: blue; font-weight: bold;'> blue </strong> body appeared?</p>"]
-// 	var questions_daxby = ["<p>How many times has a robot with a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body appeared?</p>", "<p>How many times has a robot with a <strong style = 'color: blue; font-weight: bold;'> blue </strong> body appeared?</p>"]
-// 	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Boxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
-//
-// 	var question_boxby={
-// 		type: 'survey-text-force',
-// 		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Boxby Land</strong></p>'],
-// 		questions: questions_boxby,
-// 		required: [true, true]
-// 	}
-//
-// 	var question_daxby={
-// 		type: 'survey-text-force',
-// 		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Daxby Land</strong></p>'],
-// 		questions: questions_daxby,
-// 		required: [true, true]
-// 	}
-//
-// 	var questions={
-// 		type: 'survey-text-force',
-// 		questions: questions,
-// 		required: [true, true]
-// 	}
-//
-// 	var goodbye = {
-// 		type: "instructions",
-// 		pages: ['<p>Thanks so much for participating in this research.</p>' + `Your final bonus is $${BONUS.toFixed(2)}`],
-// 		show_clickable_nav: true
-// 	}
+	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."]
+
+	var recall = {
+		type: 'survey-text',
+		questions: recall_q
+	}
+
+
+	var questions_boxby = ["<p>How many times has a robot with a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body appeared?</p> ", "<p>How many times has a robot with a  <strong style = 'color: blue; font-weight: bold;'> blue </strong> body appeared?</p>"]
+	var questions_daxby = ["<p>How many times has a robot with a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body appeared?</p>", "<p>How many times has a robot with a <strong style = 'color: blue; font-weight: bold;'> blue </strong> body appeared?</p>"]
+	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Boxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
+
+	var question_boxby={
+		type: 'survey-text-force',
+		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Boxby Land</strong></p>'],
+		questions: questions_boxby,
+		required: [true, true]
+	}
+
+	var question_daxby={
+		type: 'survey-text-force',
+		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Daxby Land</strong></p>'],
+		questions: questions_daxby,
+		required: [true, true]
+	}
+
+	var questions={
+		type: 'survey-text-force',
+		questions: questions,
+		required: [true, true]
+	}
+
+	var goodbye = {
+		type: "instructions",
+		pages: ['<p>Thanks so much for participating in this research.</p>' + `Your final bonus is $${BONUS.toFixed(2)}`],
+		show_clickable_nav: true
+	}
 
 
   /////////////////////////
