@@ -88,6 +88,7 @@ async function initializeExperiment() {
 		choices: ['b', 'd'],
 		randomize_order: true
 	};
+	console.log("test")
 // //
 // 	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."]
 //
