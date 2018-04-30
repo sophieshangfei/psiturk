@@ -134,11 +134,23 @@ async function initializeExperiment() {
   /////////////////////////
 
 	var condition = 1
-	if (condition == 1){
-			timeline.push(instruction, introduction, secondary_task, bonus_instruction, test, recall, question_boxby, question_daxby, questions, goodbye);
-	} else {
-		timeline.push(instruction, introduction, bonus_instruction, test, question_boxby, question_daxby, questions, goodbye);
-	}
+	// if (condition == 1){
+// 			timeline.push(instruction, introduction, secondary_task, bonus_instruction, test, recall, question_boxby, question_daxby, questions, goodbye);
+// 	} else {
+// 		timeline.push(instruction, introduction, bonus_instruction, test, question_boxby, question_daxby, questions, goodbye);
+// 	}
+	timeline = [
+		instruction,
+		introduction,
+		secondary_task,
+		bonus_instruction,
+		test,
+		recall,
+		question_boxby,
+		question_daxby,
+		questions,
+		goodbye
+	];
 
   return startExperiment({
     timeline,
