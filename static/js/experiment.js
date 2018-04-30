@@ -1,5 +1,6 @@
 
 async function initializeExperiment() {
+  console.log('updated');
   console.log('initializeExperiment');
   console.log('data');
 
