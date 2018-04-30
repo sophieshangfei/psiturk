@@ -1,9 +1,10 @@
-jsPsych.plugins["survey-text-force"] = (function() {
-  console.log("load please")
+
+jsPsych.plugins['survey-text-force'] = (function() {
+
   var plugin = {};
   
   plugin.trial = function(display_element, trial) {
-    var plugin_id_name = "survey-text-force";
+    var plugin_id_name = "jspsych-survey-text-force";
     var plugin_id_selector = '#' + plugin_id_name;
     var _join = function( /*args*/ ) {
       var arr = Array.prototype.slice.call(arguments, _join.length);
@@ -160,11 +161,7 @@ jsPsych.plugins["survey-text-force"] = (function() {
 
     var startTime = (new Date()).getTime();
 
-<<<<<<< HEAD
   };
-=======
-  }) ();
->>>>>>> 52aec155a1dcefa5e496e09cf7e3e2e5fd8a40b9
 
   return plugin;
 })();
