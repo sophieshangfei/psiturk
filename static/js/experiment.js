@@ -21,10 +21,10 @@ async function initializeExperiment() {
 			`
 				<h1>Instructions</h1>
 				You are going to observe two groups of robots. One group comes from
-				Boxby Land. The other group comes from Daxby Land. For this
+				Kizik Land. The other group comes from Daxby Land. For this
 				experiment, we try to draw a random sample from the robot population.
-				In the robot world, Boxby Land is less populated, and as such, robots
-				from Boxby Land occur less frequently in the pictures you will see.
+				In the robot world, Kizik Land is less populated, and as such, robots
+				from Kizik Land occur less frequently in the pictures you will see.
 			`
 		],
 		show_clickable_nav: true
@@ -83,7 +83,7 @@ async function initializeExperiment() {
 		timeline: stimuli,
 		prompt: `<p class="center-content">
 			Where is this robot from?<br>
-			Press <b>D</b> for Daxby Land or <b>B</b> for Boxby Land.
+			Press <b>D</b> for Daxby Land or <b>B</b> for Kizik Land.
 			</p>`,
 		choices: ['b', 'd'],
 		randomize_order: true
@@ -98,23 +98,9 @@ async function initializeExperiment() {
 	}
 
 
-	var questions_boxby = ["<p>How many times has a robot with a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body appeared?</p> ", "<p>How many times has a robot with a  <strong style = 'color: blue; font-weight: bold;'> blue </strong> body appeared?</p>"]
-	var questions_daxby = ["<p>How many times has a robot with a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body appeared?</p>", "<p>How many times has a robot with a <strong style = 'color: blue; font-weight: bold;'> blue </strong> body appeared?</p>"]
-	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Boxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
+	
+	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 
-	var question_boxby={
-		type: 'survey-text-force',
-		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Boxby Land</strong></p>'],
-		questions: questions_boxby,
-		required: [true, true]
-	}
-
-	var question_daxby={
-		type: 'survey-text-force',
-		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Daxby Land</strong></p>'],
-		questions: questions_daxby,
-		required: [true, true]
-	}
 
 	var questions={
 		type: 'survey-text-force',
@@ -135,9 +121,9 @@ async function initializeExperiment() {
 
 	var condition = 1
 	// if (condition == 1){
-// 			timeline.push(instruction, introduction, secondary_task, bonus_instruction, test, recall, question_boxby, question_daxby, questions, goodbye);
+// 			timeline.push(instruction, introduction, secondary_task, bonus_instruction, test, recall, questions, goodbye);
 // 	} else {
-// 		timeline.push(instruction, introduction, bonus_instruction, test, question_boxby, question_daxby, questions, goodbye);
+// 		timeline.push(instruction, introduction, bonus_instruction, test, questions, goodbye);
 // 	}
 	timeline = [
 		instruction,
@@ -146,8 +132,6 @@ async function initializeExperiment() {
 		bonus_instruction,
 		test,
 		recall,
-		question_boxby,
-		question_daxby,
 		questions,
 		goodbye
 	];
