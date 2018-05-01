@@ -4,8 +4,8 @@ async function initializeExperiment() {
   console.log('initializeExperiment');
   console.log('data');
 
-	BONUS = 0
-	BONUS_RATE = 0.01
+	BONUS = 0;
+	BONUS_RATE = 0.01;
   
   jsPsych.pluginAPI.preloadImages(['static/images/population.png',
                                    'static/images/yellow.png',
@@ -28,14 +28,14 @@ async function initializeExperiment() {
 			`
 		],
 		show_clickable_nav: true
-	}
+	};
 
 
 	var introduction = {
 		type: 'single-stim',
 		stimulus: "static/images/population.png",
 		choices: ["y", "n"],
-		prompt: '<p class="center-content">Press y when you are ready.</p>'
+		prompt: '<p class="center-content">Each circle represents one robot. Observe that there are more robots from Daxby Land. <br> Press y when you are ready.</p>'
 	};
 
 
@@ -88,31 +88,47 @@ async function initializeExperiment() {
 		choices: ['b', 'd'],
 		randomize_order: true
 	};
-	console.log("test")
+	console.log("test");
 //
-	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."]
+	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."];
 
 	var recall = {
 		type: 'survey-text',
 		questions: recall_q
-	}
+	};
 
 
 	
 	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 
+	var question_boxby={
+		type: 'survey-text-force',
+		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Boxby Land</strong></p>'],
+		questions: questions_boxby,
+		required: [true, true]
+	};
 
-	var questions={
+	var question_daxby={
+		type: 'survey-text-force',
+		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Daxby Land</strong></p>'],
+		questions: questions_daxby,
+		required: [true, true]
+	};
+
+
+	var questions = {
 		type: 'survey-text-force',
 		questions: questions,
 		required: [true, true]
-	}
+	};
 
 	var goodbye = {
 		type: "instructions",
-		pages: ['<p>Thanks so much for participating in this research.</p>' + `Your final bonus is $${BONUS.toFixed(2)}`],
+		pages: function() {
+			return ['<p>Thanks so much for participating in this research.</p>' + `Your final bonus is $${BONUS.toFixed(2)}`]
+		},
 		show_clickable_nav: true
-	}
+	};
 
 
   /////////////////////////
@@ -126,11 +142,11 @@ async function initializeExperiment() {
 // 		timeline.push(instruction, introduction, bonus_instruction, test, questions, goodbye);
 // 	}
 	timeline = [
-		instruction,
-		introduction,
-		secondary_task,
-		bonus_instruction,
-		test,
+		// instruction,
+		// introduction,
+		// secondary_task,
+		// bonus_instruction,
+		// test,
 		recall,
 		questions,
 		goodbye
