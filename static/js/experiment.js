@@ -101,20 +101,6 @@ async function initializeExperiment() {
 	
 	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 
-	var question_boxby={
-		type: 'survey-text-force',
-		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Boxby Land</strong></p>'],
-		questions: questions_boxby,
-		required: [true, true]
-	};
-
-	var question_daxby={
-		type: 'survey-text-force',
-		preamble: ['<p style= "text-align: left; font-size: 50px;">For robots from <strong style = "font-size: 48px;">Daxby Land</strong></p>'],
-		questions: questions_daxby,
-		required: [true, true]
-	};
-
 
 	var questions = {
 		type: 'survey-text-force',
@@ -142,11 +128,11 @@ async function initializeExperiment() {
 // 		timeline.push(instruction, introduction, bonus_instruction, test, questions, goodbye);
 // 	}
 	timeline = [
-		// instruction,
-		// introduction,
-		// secondary_task,
-		// bonus_instruction,
-		// test,
+		instruction,
+		introduction,
+		secondary_task,
+		bonus_instruction,
+		test,
 		recall,
 		questions,
 		goodbye
