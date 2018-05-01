@@ -101,11 +101,9 @@ async function initializeExperiment() {
 	
 	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 
-
 	var questions = {
-		type: 'survey-text-force',
-		questions: questions,
-		required: [true, true]
+		type: 'slider',
+		prompt: questions
 	};
 
 	var goodbye = {
