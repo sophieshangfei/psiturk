@@ -66,7 +66,7 @@ jsPsych.plugins["robot"] = (function() {
         group: trial.group,
         correct: correct
       }
-      delay(4000, function() {
+      delay(3000, function() {
         console.log(trialdata)
         display_element.html('')
         jsPsych.finishTrial(trialdata);
@@ -75,7 +75,7 @@ jsPsych.plugins["robot"] = (function() {
 
     jsPsych.pluginAPI.getKeyboardResponse({
       callback_function: after_response,
-      valid_responses: ['d', 'b'],
+      valid_responses: ['d', 'k'],
       rt_method: 'date',
       persist: false,
       allow_held_key: false
