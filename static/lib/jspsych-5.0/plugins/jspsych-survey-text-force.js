@@ -150,7 +150,7 @@ jsPsych.plugins['survey-text-force'] = (function() {
       // save data
       var trial_data = {
         "rt": response_time,
-        "responses": JSON.stringify(question_data)
+        "responses": question_data
       };
       display_element.html('');
 

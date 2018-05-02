@@ -1,3 +1,5 @@
+/*jshint esversion: 6*/
+
 async function initializeExperiment() {
   console.log('updated');
   console.log('initializeExperiment');
@@ -5,6 +7,9 @@ async function initializeExperiment() {
 
 	BONUS = 0;
 	BONUS_RATE = 0.01;
+	GUESS = undefined;
+	NUMBER = undefined;
+
   
   jsPsych.pluginAPI.preloadImages(['static/images/population.png',
                                    'static/images/yellow.png',
@@ -59,23 +64,52 @@ async function initializeExperiment() {
 		type: "survey-text-force",
 		preamble: function() {
 			var digits = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
-			var digit_task = jsPsych.randomization.sample(digits, 7, true).join("");
-			var number = "<p style= 'color: blue; font-size: 48px;'>" + digit_task + "</p>";
-			return number + "<p>Memorize the digits shown above. We will ask you to recall these digits at the end of the experiment. Please don't write them down.</p>"
+			NUMBER = jsPsych.randomization.sample(digits, 7, true).join("");
+			psiturk.recordUnstructuredData('number', NUMBER);
+			var number = "<p style= 'color: blue; font-size: 48px;'>" + NUMBER + "</p>";
+			return number + "<p>Memorize the digits shown above. We will ask you to recall these digits at the end of the experiment. Please don't write them down.</p>";
 		},
 		questions: secondary_task_q,
 		is_html: true,
 		required: [true]
 	};
 
+	var check_secondary = {
+		type: 'survey-text-force',
+		preamble: '<h1>Memory Check</h1>',
+		questions: ['Please enter the number you were asked to memorize earlier.'],
+		on_finish: function(data) {
+			GUESS = data.responses.Q0;
+			psiturk.recordUnstructuredData('guess', GUESS);
+		}
+	};
+
+	var check_secondary_feedback = {
+		type: 'text',
+		text: function() {
+			var correct = GUESS == NUMBER;
+			var acc = correct ?
+				"<strong style='color: green'>Correct!</strong>" :
+				"<strong style='color: red'>Incorrect!</strong>";
+			return `
+				${acc}<br>
+				The number was <b>${NUMBER}</b>.<br>
+				Please keep the number in memory because we will ask you to recall it again.
+			`;
+
+		}
+	};
+
+
+
 	var bonus_instruction = {
 		type: "instructions",
 		pages: [
-			`<p>For the following tasks, you will be asked to make some predictions.</p>
+			`<p>On each trial, you will see a robot and you’ll have to predict which land the robot is from.</p>
 			<p>You will receive a bonus of <strong> 1 cent </strong> for each correct prediction`
 		],
 		show_clickable_nav: true
-	}
+	};
 
 	var test = {
 		type: "robot",
@@ -95,23 +129,16 @@ async function initializeExperiment() {
 		questions: recall_q
 	};
 
-	var d_question = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
-	var k_question = ["<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 
-	var question_d = {
+	var questions = {
 		type: 'slider',
-		prompt: d_question
-	};
-	
-	var question_k = {
-		type: 'slider',
-		prompt: k_question
+		prompt: ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 	};
 
 	var goodbye = {
 		type: "instructions",
 		pages: function() {
-			return ['<p>Thanks so much for participating in this research.</p>' + `Your final bonus is $${BONUS.toFixed(2)}`]
+			return ['<p>Thanks so much for participating in this research.</p>' + `Your final bonus is $${BONUS.toFixed(2)}`];
 		},
 		show_clickable_nav: true
 	};
@@ -121,27 +148,28 @@ async function initializeExperiment() {
   // Experiment timeline //
   /////////////////////////
 
-	var condition = 1
+	var condition = 1;
 	// if (condition == 1){
 // 			timeline.push(instruction, introduction, secondary_task, bonus_instruction, test, recall, questions, goodbye);
 // 	} else {
 // 		timeline.push(instruction, introduction, bonus_instruction, test, questions, goodbye);
 // 	}
 	timeline = [
+		check_secondary,
+		check_secondary_feedback,
 		instruction,
 		introduction,
 		secondary_task,
 		bonus_instruction,
 		test,
 		recall,
-		question_d,
-		question_k,
+		questions,
 		goodbye
 	];
 
   return startExperiment({
     timeline,
   });
-};
+}
 
 
