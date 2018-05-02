@@ -144,10 +144,15 @@ async function initializeExperiment() {
 	};
 
 
-	var questions = {
+	var question_k = {
 		type: 'slider',
-		prompt: ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
+		prompt: ["<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 	};
+	
+	var question_d = {
+		type: 'slider',
+		prompt: ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
+	}
 
 	var goodbye = {
 		type: "instructions",
@@ -178,7 +183,8 @@ async function initializeExperiment() {
 		check_secondary_feedback,
 		test_2,
 		recall,
-		questions,
+		question_k,
+		question_d,
 		goodbye
 	];
 
