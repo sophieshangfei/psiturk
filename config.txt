@@ -1,14 +1,14 @@
 [HIT Configuration]
-title = Example JsPsych Psiturk Experiment
-description = For educational purposes
-amt_keywords = Psychology
+title = Robot Prediction
+description = Earn a bonus by making accurate predictions in this Psychology Experiment
+amt_keywords = Psychology, Experiment
 lifetime = 24
 us_only = true
 approve_requirement = 95
-contact_email_on_error = youremail@gmail.com
-ad_group = Default psiTurk
-organization_name = New Great University
-browser_exclude_rule = MSIE, mobile, tablet
+contact_email_on_error = cocosci.turk@gmail.com
+ad_group = psychology
+organization_name = Cocosci
+browser_exclude_rule = MSIEt, mobile, tablet
 allow_repeats = false
 
 [Database Parameters]
@@ -29,8 +29,8 @@ secret_key = 'this is my secret key which is hard to guess, i should change this
 adserver_revproxy_host = robot-expt.herokuapp.com
 
 [Task Parameters]
-experiment_code_version = 1.0
-num_conds = 1
+experiment_code_version = 0.1
+num_conds = 2
 num_counters = 1
 
 [Shell Parameters]
@@ -41,5 +41,5 @@ bonus_message = "Thanks for participating!"
 #
 #   https://<host>:<port>/ad 
 
-use_psiturk_ad_server = true
-ad_location = false
+use_psiturk_ad_server = false
+ad_location = https://robot-expt.herokuapp.com/ad
