@@ -157,9 +157,9 @@ async function initializeExperiment() {
 	timeline = [
 		instruction,
 		introduction,
+		secondary_task,
 		check_secondary,
 		check_secondary_feedback,
-		secondary_task,
 		bonus_instruction,
 		test,
 		recall,
