@@ -10,6 +10,10 @@ async function initializeExperiment() {
 	GUESSES = []
 	NUMBER = 123;
 
+	if (condition == "{{ condition }}") {
+		condition = 0;
+	}
+
   
   psiturk.preloadImages(['static/images/population.png',
                          'static/images/yellow.png',
@@ -180,24 +184,23 @@ async function initializeExperiment() {
   // Experiment timeline //
   /////////////////////////
 
-	var condition = 1;
 	// if (condition == 1){
 // 			timeline.push(instruction, introduction, memory_task, bonus_instruction, test, recall, questions, goodbye);
 // 	} else {
 // 		timeline.push(instruction, introduction, bonus_instruction, test, questions, goodbye);
 // 	}
-	timeline = [
-		instruction,
-		memory_task,
-		test_1,
-		check_memory,
-		check_memory_feedback,
-		test_2,
-		check_memory,
-		question_k,
-		question_d,
-		goodbye
-	];
+	
+	var timeline = []
+	timeline.push(instruction);
+	if (condition == 1) timeline.push(memory_task);
+	timeline.push(test_1);
+	if (condition == 1) timeline.push(check_memory);
+	if (condition == 1) timeline.push(check_memory_feedback);
+	timeline.push(test_2);
+	if (condition == 1) timeline.push(check_memory);
+	timeline.push(question_k);
+	timeline.push(question_d);
+	timeline.push(goodbye);
 
   return startExperiment({
     timeline,
