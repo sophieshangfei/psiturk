@@ -57,7 +57,10 @@ async function initializeExperiment() {
 		});
 		return json;
 	})();
-
+	
+	var stimuli_1 = stimuli.slice (0, 8)
+	var stimuli_2 = stimuli.slice (9, 17)
+	
 
 	var secondary_task_q = ['Please type in the number'];
 	var secondary_task = {
@@ -111,9 +114,9 @@ async function initializeExperiment() {
 		show_clickable_nav: true
 	};
 
-	var test = {
+	var test_1 = {
 		type: "robot",
-		timeline: stimuli,
+		timeline: stimuli_1,
 		prompt: `<p class="center-content">
 			Where is this robot from?<br>
 			Press <b>D</b> for Daxby Land or <b>K</b> for Kizik Land.
@@ -121,6 +124,17 @@ async function initializeExperiment() {
 		choices: ['b', 'd'],
 		randomize_order: true
 	};
+	
+	var test_2 = {
+		type: "robot",
+		timeline: stimuli_2,
+		prompt: `<p class="center-content">
+			Where is this robot from?<br>
+			Press <b>D</b> for Daxby Land or <b>K</b> for Kizik Land.
+			</p>`,
+		choices: ['b', 'd'],
+		randomize_order: true
+	}
 
 	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."];
 
@@ -158,10 +172,11 @@ async function initializeExperiment() {
 		instruction,
 		introduction,
 		secondary_task,
+		bonus_instruction,
+		test_1,
 		check_secondary,
 		check_secondary_feedback,
-		bonus_instruction,
-		test,
+		test_2,
 		recall,
 		questions,
 		goodbye
