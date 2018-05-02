@@ -20,7 +20,7 @@ jsPsych.plugins['survey-text-force'] = (function() {
 	if (typeof trial.rows == 'undefined') {
       trial.rows = [];
       for (var i = 0; i < trial.questions.length; i++) {
-        trial.rows.push(trial.rows.default);
+        trial.rows.push(1.5);
       }
     }
     if (typeof trial.columns == 'undefined') {

@@ -52,7 +52,7 @@ jsPsych.plugins["robot"] = (function() {
           "<strong style='color: red'>Incorrect!</strong>"}
         <br>
 
-        This robot is from ${capitalize(trial.group)} Land.
+        This robot is from <b>${capitalize(trial.group)} Land</b>.
         
     <br>
     Your current bonus is $${BONUS.toFixed(2)}
