@@ -1,4 +1,3 @@
-
 async function initializeExperiment() {
   console.log('updated');
   console.log('initializeExperiment');
@@ -35,7 +34,7 @@ async function initializeExperiment() {
 		type: 'single-stim',
 		stimulus: "static/images/population.png",
 		choices: ["y", "n"],
-		prompt: '<p class="center-content">Each circle represents one robot. Observe that there are more robots from Daxby Land. <br> Press y when you are ready.</p>'
+		prompt: '<p class="center-content">Each circle represents one robot. <br> Observe that there are more robots from Daxby Land. <br> Press y when you are ready.</p>'
 	};
 
 
@@ -83,13 +82,12 @@ async function initializeExperiment() {
 		timeline: stimuli,
 		prompt: `<p class="center-content">
 			Where is this robot from?<br>
-			Press <b>D</b> for Daxby Land or <b>B</b> for Kizik Land.
+			Press <b>D</b> for Daxby Land or <b>K</b> for Kizik Land.
 			</p>`,
 		choices: ['b', 'd'],
 		randomize_order: true
 	};
-	console.log("test");
-//
+
 	var recall_q = ["Please write down the digits shown to you at the beginning of the experiment."];
 
 	var recall = {
@@ -97,13 +95,17 @@ async function initializeExperiment() {
 		questions: recall_q
 	};
 
+	var d_question = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
+	var k_question = ["<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 
-	
-	var questions = ["<p>Out of 100 robots from Daxby Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>", "<p>Out of 100 robots from Kizik Land, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
-
-	var questions = {
+	var question_d = {
 		type: 'slider',
-		prompt: questions
+		prompt: d_question
+	};
+	
+	var question_k = {
+		type: 'slider',
+		prompt: k_question
 	};
 
 	var goodbye = {
@@ -132,7 +134,8 @@ async function initializeExperiment() {
 		bonus_instruction,
 		test,
 		recall,
-		questions,
+		question_d,
+		question_k,
 		goodbye
 	];
 
