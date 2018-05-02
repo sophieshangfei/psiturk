@@ -118,6 +118,11 @@ jsPsych.plugins.slider = (function() {
       $("#next").click(function() {
 
         var score = $("#slider").slider("value");
+		
+        // save data
+        var trial_data = {
+          "responses": score
+        };
 
         // goto next trial in block
         display_element.html('');
