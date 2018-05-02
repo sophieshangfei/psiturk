@@ -1,14 +1,13 @@
 /*jshint esversion: 6*/
 
 async function initializeExperiment() {
-  console.log('updated');
-  console.log('initializeExperiment');
-  console.log('data');
+	psiturk.recordUnstructuredData('start_time', new Date());
 
 	BONUS = 0;
 	BONUS_RATE = 0.01;
-	GUESSES = []
+	GUESSES = [];
 	NUMBER = 123;
+
 
 	if (condition == "{{ condition }}") {
 		condition = 0;
@@ -104,7 +103,10 @@ async function initializeExperiment() {
 		},
 		questions: ['Please enter the number here.'],
 		is_html: true,
-		required: [true]
+		required: [true],
+		on_finish: function(data) {
+			GUESSES.push(data.responses.Q0);
+		}
 	};
 
 
@@ -112,6 +114,7 @@ async function initializeExperiment() {
 		type: 'survey-text-force',
 		preamble: '<h1>Memory Check</h1>',
 		questions: ['Please enter the number you were asked to memorize earlier.'],
+		required: [true],
 		on_finish: function(data) {
 			GUESSES.push(data.responses.Q0);
 		}
@@ -128,7 +131,7 @@ async function initializeExperiment() {
 				You're now ready to begin seeing robots and predicting where they are from.
 				You will see ${stimuli.length} robots in total.
 				Remember, you earn one cent for each correct prediction. Good luck!
-			`
+			`;
 		},
 		choices: ['Begin'],
 		button_html: '<button class="btn btn-primary btn-lg">%choice%</button>'
@@ -141,7 +144,7 @@ async function initializeExperiment() {
 		choices: ['Continue'],
 		button_html: '<button class="btn btn-primary btn-lg">%choice%</button>',
 		stimulus: function() {
-			var correct = GUESSES[0] == NUMBER;
+			var correct = _.last(GUESSES) == NUMBER;
 			var acc = correct ?
 				"<strong style='color: green'>Correct!</strong>" :
 				"<strong style='color: red'>Incorrect!</strong>";
@@ -178,11 +181,13 @@ async function initializeExperiment() {
 
 	var question_k = {
 		type: 'slider',
+		tag: 'kizik',
 		prompt: ["<p>Out of 100 robots from <b>Kizik Land</b>, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 	};
 	
 	var question_d = {
 		type: 'slider',
+		tag: 'daxby',
 		prompt: ["<p>Out of 100 robots from <b>Daxby Land</b>, how many have a <strong style = 'color: orange; font-weight: bold;'>yellow</strong> body?</p>"]
 	};
 
@@ -190,6 +195,8 @@ async function initializeExperiment() {
 		type: "button-response",
 		is_html: true,
 		stimulus: function() {
+			psiturk.recordUnstructuredData('bonus', BONUS);
+			psiturk.recordUnstructuredData('guesses', GUESSES);
 			return ['<p>Thanks so much for participating in this research.</p>' + `Your final bonus is $${BONUS.toFixed(2)}`];
 		},
 		choices: ['Complete HIT'],
@@ -207,7 +214,7 @@ async function initializeExperiment() {
 // 		timeline.push(instruction, introduction, bonus_instruction, test, questions, goodbye);
 // 	}
 	
-	var timeline = []
+	var timeline = [];
 	timeline.push(instruction);
 	if (condition == 1) timeline.push(memory_task);
 	timeline.push(pre_test);

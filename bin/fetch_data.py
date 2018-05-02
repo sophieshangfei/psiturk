@@ -125,7 +125,7 @@ def reformat_data(version):
                     print(k, v)
                     row[k] = v
             else:
-                bonus_row = df[df[1] == 'final_bonus']
+                bonus_row = df[df[1] == 'bonus']
                 if len(bonus_row):
                     bonus = float(list(bonus_row[2])[0])
                     row['bonus'] = bonus
@@ -153,7 +153,7 @@ def reformat_data(version):
     # Split tdf into separate dataframes for each type of trial.
     data = {'participants': pdf}
     for trial_type, df in tdf.groupby('trial_type'):
-        # df = df.dropna(axis=1)
+        df = df.dropna(axis=1)
         df = df.drop('internal_node_id', axis=1)
         df = df.drop('trial_index', axis=1)
         df.columns = [to_snake_case(c) for c in df.columns]
@@ -176,6 +176,7 @@ def main(version, address, username, password):
     files = ["trialdata", "eventdata", "questiondata"]
     for filename in files:
         fetch(address, filename, version)
+    reformat_data(version)
 
 
 if __name__ == "__main__":
@@ -187,10 +188,6 @@ if __name__ == "__main__":
               "parameter in the psiTurk config.txt file that was used when the "
               "data was collected."))
 
-    url = "https://ball-exp.herokuapp.com/data"
-    if url == "https://ball-exp.herokuapp.com/data":
-        print('Set the URL in this file before usage. Then delete this ')
-        exit(1)
-
+    url = "https://robot-expt.herokuapp.com/data"
     args = parser.parse_args()
     main(args.version, url, 'user', 'pw')  # from config.txt
