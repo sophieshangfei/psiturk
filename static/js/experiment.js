@@ -75,8 +75,8 @@ async function initializeExperiment() {
 
 	stimuli = _.shuffle(stimuli)
 
-	var stimuli_1 = stimuli.slice (0, 8)
-	var stimuli_2 = stimuli.slice (9, 17)
+	var stimuli_1 = stimuli.slice (0, 9);
+	var stimuli_2 = stimuli.slice (9, 18);
 	
 
 	var memory_task = {
@@ -107,6 +107,7 @@ async function initializeExperiment() {
 		required: [true]
 	};
 
+
 	var check_memory = {
 		type: 'survey-text-force',
 		preamble: '<h1>Memory Check</h1>',
@@ -115,6 +116,24 @@ async function initializeExperiment() {
 			GUESSES.push(data.responses.Q0);
 		}
 	};
+
+
+	var pre_test = {
+		type: "button-response",
+		is_html: true,
+		stimulus: function() {
+			return `
+				<h1>Instructions Complete</h1>
+
+				You're now ready to begin seeing robots and predicting where they are from.
+				You will see ${stimuli.length} robots in total.
+				Remember, you earn one cent for each correct prediction. Good luck!
+			`
+		},
+		choices: ['Begin'],
+		button_html: '<button class="btn btn-primary btn-lg">%choice%</button>'
+	};
+
 
 	var check_memory_feedback = {
 		type: "button-response",
@@ -134,8 +153,6 @@ async function initializeExperiment() {
 
 		}
 	};
-
-
 
 	var test_1 = {
 		type: "robot",
@@ -193,6 +210,7 @@ async function initializeExperiment() {
 	var timeline = []
 	timeline.push(instruction);
 	if (condition == 1) timeline.push(memory_task);
+	timeline.push(pre_test);
 	timeline.push(test_1);
 	if (condition == 1) timeline.push(check_memory);
 	if (condition == 1) timeline.push(check_memory_feedback);
