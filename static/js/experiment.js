@@ -8,7 +8,7 @@ async function initializeExperiment() {
 	BONUS = 0;
 	BONUS_RATE = 0.01;
 	GUESS = undefined;
-	NUMBER = 123;
+	NUMBER = undefined;
 
   
   jsPsych.pluginAPI.preloadImages(['static/images/population.png',
@@ -93,8 +93,8 @@ async function initializeExperiment() {
 				"<strong style='color: red'>Incorrect!</strong>";
 			return `
 				${acc}<br>
-				The number was ${NUMBER}. Please keep the number in memory because we
-				will ask you to recall it one more time.
+				The number was <b>${NUMBER}</b>.<br>
+				Please keep the number in memory because we will ask you to recall it again.
 			`;
 
 		}
