@@ -106,34 +106,40 @@ def reformat_data(version):
     def parse_questiondata():
         qdf = pd.read_csv(data_path + 'questiondata.csv', header=None)
         for uid, df in qdf.groupby(0):
-            try:
-                row = ast.literal_eval(list(df[df[1] == 'params'][2])[0])
-            except:
-                row = {}
+            
             wid, aid = uid.split(':')
             identifiers['worker_id'].append(wid)
             identifiers['assignment_id'].append(aid)
             identifiers['pid'].append(pid_labeler(wid))
-            row['pid'] = pid_labeler(wid)
 
-            completed_row = df[df[1] == 'completed']
-            if len(completed_row):
-                assert len(completed_row) == 1
+            row = df.drop(0, axis=1).set_index(1)[2]
+            row['pid'] = pid_labeler(wid)
+            try:
+                row['bonus'] = round(float(row['bonus']), 2)
                 row['completed'] = True
-                data = ast.literal_eval(completed_row[2].iloc[0])
-                for k, v in data.items():
-                    print(k, v)
-                    row[k] = v
-            else:
-                bonus_row = df[df[1] == 'bonus']
-                if len(bonus_row):
-                    bonus = float(list(bonus_row[2])[0])
-                    row['bonus'] = bonus
-                    row['completed'] = True
-                else:
-                    row['bonus'] = 0
-                    row['completed'] = False
+            except KeyError:
+                row['completed'] = False
+                
             yield row
+
+            # completed_row = df[df[1] == 'completed']
+            # if len(completed_row):
+            #     assert len(completed_row) == 1
+            #     row['completed'] = True
+            #     data = ast.literal_eval(completed_row[2].iloc[0])
+            #     for k, v in data.items():
+            #         print(k, v)
+            #         row[k] = v
+            # else:
+            #     bonus_row = df[df[1] == 'bonus']
+            #     if len(bonus_row):
+            #         bonus = float(list(bonus_row[2])[0])
+            #         row['bonus'] = bonus
+            #         row['completed'] = True
+            #     else:
+            #         row['bonus'] = 0
+            #         row['completed'] = False
+            # yield row
 
     pdf = pd.DataFrame(parse_questiondata())
     pdf['version'] = version
